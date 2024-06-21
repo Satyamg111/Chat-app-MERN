@@ -7,7 +7,7 @@
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite --openssl-legacy-provider build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
