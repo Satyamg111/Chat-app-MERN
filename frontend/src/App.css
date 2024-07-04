@@ -1,9 +1,10 @@
 .App {
     min-height: 100vh;
     display: flex;
-    /* background-image: url();
-   background-size: cover;
-   background-position: center;  */
+    background: url('./assets/chat-backgound.jpg');
+   /* background-size: cover; */
+   background-position: center; 
+   backdrop-filter: opacity(0.3);
 }
 ::-webkit-scrollbar {
     display: none;

@@ -6,7 +6,7 @@ import { useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-
+import {baseUrl} from "../../url/BaseUrl";
 const SignUp = () => {
     const [show, setShow] = useState(false);
     const [name,setName] = useState();
@@ -98,7 +98,7 @@ const SignUp = () => {
                 }
             } 
             const {data} = await axios.post(
-                `${window.location.origin}/api/user`,
+                `${baseUrl}/api/user`,
                 {name,email,password,pic}, 
                 config
             );  
@@ -116,14 +116,14 @@ const SignUp = () => {
         } 
         catch (error) {
             toast({
-                title: 'Registation failed',
-                description: error.response.data.message,
-                status: 'failure',
+                title: 'Registration failed',
+                status: 'error',
+                description: error.message,
                 duration: 5000,
                 isClosable: true,
                 position:"bottom",
-              });
-              setLoading(false);
+            });
+            setLoading(false);
         }
     }
 

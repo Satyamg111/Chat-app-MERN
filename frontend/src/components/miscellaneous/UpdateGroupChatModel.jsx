@@ -5,6 +5,7 @@ import { ChatState } from '../../context/ChatProvider';
 import UserBadgeItem from '../userAvatar/UserBadgeItem';
 import axios from 'axios';
 import UserListItem from '../userAvatar/UserListItem';
+import {baseUrl} from "../../url/BaseUrl";
 
 const UpdateGroupChatModel = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -38,7 +39,7 @@ const UpdateGroupChatModel = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
                 }
             };
 
-            const { data } = await axios.put(`${window.location.origin}/api/chat/groupremove`,{
+            const { data } = await axios.put(`${baseUrl}/api/chat/groupremove`,{
                 chatId: selectedChat._id,
                 userId: userToRemove._id,
             },
@@ -128,7 +129,7 @@ const UpdateGroupChatModel = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
                     authorization: `Bearer ${user.token}`,
                 }
             }
-            const {data} = await axios.put(`${window.location.origin}/api/chat/rename`,{
+            const {data} = await axios.put(`${baseUrl}/api/chat/rename`,{
                 chatId:selectedChat._id, 
                 chatName:groupChatName,
             },
@@ -164,7 +165,7 @@ const UpdateGroupChatModel = ({ fetchAgain, setFetchAgain,fetchMessages }) => {
                     authorization: `Bearer ${user.token}`,
                 }
             }
-            const {data} = await axios.get(`${window.location.origin}/api/user?search=${search}`,config);
+            const {data} = await axios.get(`${baseUrl}/api/user?search=${search}`,config);
             console.log(data);
             setLoading(false);
             setSearchResult(data);

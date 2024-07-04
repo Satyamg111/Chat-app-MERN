@@ -34,12 +34,15 @@ const ProfileModel = ({ user, children}) => {
                         boxSize={"150px"}
                         src={user.pic}
                         alt={user.name}
+                        display={"block"}
+                        ml={"auto"}
+                        mr={"auto"}
                     />
-                    <Text fontSize={{base:"24px", md:"38px"}} >Email: {user.email}</Text>
+                    <Text fontSize={{base:"24px", md:"32px"}} >{user.email}</Text>
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button colorScheme='blue' mr={3} onClick={onClose}>
+                    <Button colorScheme='red' mr={3} onClick={onClose}>
                         Close
                     </Button>
                 </ModalFooter>

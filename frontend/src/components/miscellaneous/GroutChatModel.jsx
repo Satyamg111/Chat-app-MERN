@@ -4,6 +4,7 @@ import { ChatState } from '../../context/ChatProvider';
 import axios from 'axios';
 import UserListItem from '../userAvatar/UserListItem';
 import UserBadgeItem from '../userAvatar/UserBadgeItem';
+import {baseUrl} from "../../url/BaseUrl";
 
 const GroutChatModel = ({ children }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -30,7 +31,7 @@ const GroutChatModel = ({ children }) => {
                     authorization: `Bearer ${user.token}`,
                 }
             }
-            const {data} = await axios.get(`${window.location.origin}/api/user?search=${search}`,config);
+            const {data} = await axios.get(`${baseUrl}/api/user?search=${search}`,config);
             console.log(data);
             setLoading(false);
             setSearchresult(data);
@@ -65,7 +66,7 @@ const GroutChatModel = ({ children }) => {
                 }
             };
 
-            const {data} = await axios.post(`${window.location.origin}/api/chat/group`,
+            const {data} = await axios.post(`${baseUrl}/api/chat/group`,
                 {
                     name:groupChatName,
                     users: JSON.stringify(selectedUsers.map((u) => u._id))
@@ -169,5 +170,3 @@ const GroutChatModel = ({ children }) => {
 }
 
 export default GroutChatModel;
-
-// continue from vid 12 , time 24:00

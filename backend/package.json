@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "server": "nodemon server.js",
-    "build":"npm install --legacy-peer-deps && npm install --legacy-peer-deps  --prefix frontend && npm run build --"
+    "build":"npm install --legacy-peer-deps && npm install --legacy-peer-deps  --prefix ../frontend && npm run build --prefix ../frontend"
   },
   "author": "",
   "license": "ISC",

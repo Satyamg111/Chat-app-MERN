@@ -9,7 +9,6 @@ const userRoutes = require('./routes/userRoutes');
 const chatRoutes = require('./routes/chatRoutes');
 const messageRoutes = require('./routes/messageRoutes');
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
-const { log } = require('console');
 
 dotenv.config()
 connectDB();

@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import { useToast } from '@chakra-ui/react'
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import {baseUrl} from "../../url/BaseUrl";
 const Login = () => {
     const [show, setShow] = useState(false);
     const [email,setEmail] = useState();
@@ -29,7 +30,6 @@ const Login = () => {
               return;
         }
         try {
-            console.log(window.location.origin);
             const config = {
                 headers: {
                     "Content-type" : "application/json",
@@ -37,11 +37,10 @@ const Login = () => {
             } 
             const {data} = await axios.post(
                 // "http://localhost:5000/api/user/login",
-                `${window.location.origin}/api/user/login`,
+                `${baseUrl}/api/user/login`,
                 {email,password}, 
                 config
             );  
-
             toast({
                 title: 'Login Successful',
                 status: 'success',
@@ -50,19 +49,19 @@ const Login = () => {
                 position:"bottom",
             });
             localStorage.setItem("userInfo", JSON.stringify(data));
-            setLoading(false);
             history.push("/chats");
+            setLoading(false);
         } 
         catch (error) {
             toast({
                 title: 'Login failed',
-                description: error.response.data.message,
-                status: 'failure',
+                status: 'error',
+                description: error.message,
                 duration: 5000,
                 isClosable: true,
                 position:"bottom",
-              });
-              setLoading(false);
+            });
+            setLoading(false);
         }
     }
     return (

@@ -3,7 +3,6 @@ import {useDisclosure} from '@chakra-ui/hooks'
 import {
     Drawer,
     DrawerBody,
-    DrawerFooter,
     DrawerHeader,
     DrawerOverlay,
     DrawerContent,
@@ -17,6 +16,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import ChatLoading from '../../components/ChatLoading';
 import UserListItem from '../userAvatar/UserListItem';
+import {baseUrl} from "../../url/BaseUrl";
 
 const SideDrawer = () => {
     const [search , setSearch] = useState("");
@@ -53,7 +53,7 @@ const SideDrawer = () => {
                     authorization: `Bearer ${user.token}`,
                 }
             };
-            const {data} = await axios.get(`${window.location.origin}/api/user?search=${search}`,config);
+            const {data} = await axios.get(`${baseUrl}/api/user?search=${search}`,config);
 
             setLoading(false);
             setSearchResult(data);
@@ -78,10 +78,11 @@ const SideDrawer = () => {
                     authorization: `Bearer ${user.token}`,
                 }
             };
-
-            const { data } = await axios.post(`${window.location.origin}/api/chat`, {userId}, config);
-
-            if( !chats.find((c) => c._id === data._id) )  setChats([data, ...chats]);
+            // search result gives us user Id to access the chat 
+            // but we are searching in chats 
+            const { data } = await axios.post(`${baseUrl}/api/chat`, {userId}, config);
+            chats.find((chat) => console.log(chat._id, "===", data._id));
+            if(!chats.find((c) => c._id === data._id) )  setChats([data, ...chats]);
                 
             setSelectedChat(data);
             setLoadingChat(false);
@@ -120,7 +121,7 @@ const SideDrawer = () => {
             </Button>
         </Tooltip>
 
-        <Text>Chat App</Text>
+        <Text fontSize={"28px"} fontWeight={"600"}>My Chat App</Text>
         <div>
             <Menu>
                 <MenuButton p={1}>
@@ -155,18 +156,20 @@ const SideDrawer = () => {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
-                    <Button onClick={handleSearch} > Go </Button>
+                    <Button onClick={ handleSearch} > <Icon as={FaSearch} /> </Button>
+                    {/* <Button onClick={handleSearch} > Go </Button> */}
                 </Box>
                 {loading ? 
                     (<ChatLoading/>) :
-                    (
+                    (   
+                        searchResult.length > 0 ? 
                         searchResult?.map((user) => (
                             <UserListItem
                                 key={user._id}
                                 user={user}
                                 handleFunction={() => accessChat(user._id)}
                             />
-                        ))
+                        )) :  <Text textAlign={"center"} fontWeight={"600"}>Not Found</Text>
                     )
                 }
                 {loadingChat && <Spinner ml={"auto"} display={"flex"} /> }

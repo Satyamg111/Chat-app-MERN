@@ -26,6 +26,7 @@ const ScrolableChat = ({messages}) => {
                   cursor={'pointer'}
                   name={m.sender.name}
                   src={m.sender.pic}
+                  alt={m.sender.name}
                 />
               </Tooltip>
             )}

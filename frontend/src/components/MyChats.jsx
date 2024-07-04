@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { ChatState } from '../context/ChatProvider';
-import { Box, Button, Stack, useToast,Text } from '@chakra-ui/react';
+import { Box, Button, Stack, useToast,Text, Image } from '@chakra-ui/react';
 import { IoIosAdd } from "react-icons/io";
 import ChatLoading from './ChatLoading'
 import {getSender} from '../config/ChatLogics'
+import {getSenderImage} from '../config/ChatLogics'
 import GroutChatModel from './miscellaneous/GroutChatModel';
 import axios from 'axios';
+import {baseUrl} from "../url/BaseUrl";
 
 const MyChats = ({ fetchAgain }) => {
     const [ loggedUser, setLoggedUser] =  useState();
@@ -20,7 +22,7 @@ const MyChats = ({ fetchAgain }) => {
                     authorization: `Bearer ${user.token}`,
                 }
             };
-            const  {data}  = await axios.get(`${window.location.origin}/api/chat`, config);
+            const  {data}  = await axios.get(`${baseUrl}/api/chat`, config);
             setChats(data);
             // console.log(data);
     
@@ -55,19 +57,19 @@ const MyChats = ({ fetchAgain }) => {
             <Box 
                 pb={3}
                 px={3}
-                fontSize={{ base:"28px" , md:"30px"}}
+                fontSize={{ base:"20px" , md:"24px",lg:"28px"}}
+                fontWeight={"500"}
                 display={"flex"}
                 w={"100%"}
                 justifyContent={"space-between"}
                 alignItems={"center"}
-            >My Chats
-            <GroutChatModel>
+            >Chats
+            <GroutChatModel display={"flex"}>
               <Button
-                display={"flex"}
-                fontSize={{base:"17px" , md:"10px" , lg:"17px"}}
+                fontSize={{base:"17px" , md:"12px" , lg:"17px"}}
                 rightIcon={<IoIosAdd />}
                 >
-                New Group Chat
+                Create Group
               </Button>
             </GroutChatModel>
             </Box>
@@ -88,15 +90,23 @@ const MyChats = ({ fetchAgain }) => {
                             chats.map((chat) => (
                                 <Box
                                     onClick={() => setSelectedChat(chat)}
+                                    display={"flex"}
                                     cursor={"pointer"}
                                     bg={selectedChat === chat ? "#38B2AC" : "#E8E8E8"}
                                     color={selectedChat === chat ? "white" : "black"}
+                                    fontWeight={"600"}
                                     px={3}
                                     py={2}
                                     borderRadius={"lg"}
                                     key={chat._id}
                                 >
-                                    <Text>
+                                    <Image
+                                        borderRadius={"full"}
+                                        boxSize={"30px"}
+                                        src={getSenderImage(loggedUser, chat.users)}
+                                        alt={getSender(loggedUser, chat.users)}
+                                    />
+                                    <Text textAlign={"center"} ml={3}>
                                         {!chat.isGroupChat ? (getSender(loggedUser, chat.users)) : (chat.chatName)}
                                     </Text>
                                 </Box>

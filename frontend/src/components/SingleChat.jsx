@@ -9,8 +9,9 @@ import ScrollableChat from './ScrollableChat'
 import axios from 'axios';
 import './styles.css';
 import io from "socket.io-client";
+import {baseUrl} from "../url/BaseUrl";
 
-const ENDPOINT = `${window.location.origin}`;
+const ENDPOINT = `${baseUrl}`;
 var socket,selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -41,7 +42,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         },
       };
       setLoading(true);
-      const {data} = await axios.get(`${window.location.origin}/api/message/${selectedChat._id}`,
+      const {data} = await axios.get(`${baseUrl}/api/message/${selectedChat._id}`,
         config
       );
       // console.log(messages);
@@ -90,7 +91,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         };
         setLoading(true);
         setNewMessage("");
-        const {data} = await axios.post(`${window.location.origin}/api/message`,
+        const {data} = await axios.post(`${baseUrl}/api/message`,
           {
             content: newMessage,
             chatId:selectedChat._id,
