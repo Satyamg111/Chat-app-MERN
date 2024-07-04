@@ -6,7 +6,7 @@
   "scripts": {
     "start": "--openssl-legacy-provider start",
     "dev": "vite",
-    "build": " vite --openssl-legacy-provider build",
+    "build": "--openssl-legacy-provider vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
