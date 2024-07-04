@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "--openssl-legacy-provider start",
+    "start": "start",
     "dev": "vite",
-    "build": "--openssl-legacy-provider vite build",
+    "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -16,6 +16,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "axios": "^1.6.8",
+    "chat-app": "file:../backend",
     "framer-motion": "^11.0.22",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -36,4 +37,3 @@
     "vite": "^5.2.0"
   }
 }
-
