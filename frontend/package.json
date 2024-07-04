@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
+    "start": "--openssl-legacy-provider start",
     "dev": "vite",
-    "build": "react-scripts --openssl-legacy-provider vite build",
+    "build": " vite --openssl-legacy-provider build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
