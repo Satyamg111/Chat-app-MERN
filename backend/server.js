@@ -14,10 +14,11 @@ dotenv.config()
 connectDB();
 app.use(cors());
 app.use(express.json());
-// app.use(express.urlencoded({extended:true}));
-// app.get('/', (req,res) => {
-//     res.send("App runnig successfully")
-// })
+app.use(express.urlencoded({extended:true}));
+
+app.get('/', (req,res) => {
+    res.send("App runnig successfully")
+})
 
 app.use('/api/user',userRoutes);
 app.use('/api/chat',chatRoutes);
