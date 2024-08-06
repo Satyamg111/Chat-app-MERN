@@ -41,13 +41,13 @@ app.use('/api/message',messageRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT | 5000;
+const PORT = process.env.PORT;
 const server = app.listen(PORT,()=>console.log(`running on ${PORT}...`));
 
 const io = require("socket.io")(server, {
     pingTimeout: 60000,
     cors:{
-        origin: "http://localhost:5173",
+        origin: ["http://localhost:5173", "https://chat-app-mern-chi.vercel.app/"],
     }
 });
 
