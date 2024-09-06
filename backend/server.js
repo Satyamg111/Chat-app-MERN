@@ -24,20 +24,7 @@ app.use('/api/user',userRoutes);
 app.use('/api/chat',chatRoutes);
 app.use('/api/message',messageRoutes);
 
-// res.send('Api runnig successfully');
-// ---------deployment------
-// const __dirname1 =  path.resolve();
-// if(process.env.NODE_ENV === "production") {
-//     console.log('deploying ......')
-//     app.use(express.static(path.join(__dirname1,'..','frontend/dist')))
-//     app.get('*',(req,res) => {
-//         console.log("sending index file");
-//         res.sendFile(path.resolve(__dirname1,'..','frontend','dist','index.html'));
-//     })
-// }else {
-//     res.send('Api runnig successfully');
-// }
-// ---------deployment------
+
 
 app.use(notFound);
 app.use(errorHandler);
@@ -48,7 +35,7 @@ const server = app.listen(PORT,()=>console.log(`running on ${PORT}...`));
 const io = require("socket.io")(server, {
     pingTimeout: 60000,
     cors:{
-        origin: ["http://localhost:5173", "https://chat-app-mern-chi.vercel.app/"],
+        origin: ["https://chat-app-mern-chi.vercel.app","http://localhost:5173"],
     }
 });
 

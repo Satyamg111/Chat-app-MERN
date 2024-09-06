@@ -32,7 +32,6 @@ const GroutChatModel = ({ children }) => {
                 }
             }
             const {data} = await axios.get(`${baseUrl}/api/user?search=${search}`,config);
-            console.log(data);
             setLoading(false);
             setSearchresult(data);
         } catch (error) {
@@ -73,7 +72,6 @@ const GroutChatModel = ({ children }) => {
                 },
                 config,
             );
-            console.log(data);
             setChats([data, ...chats]);
             onClose();
             toast({

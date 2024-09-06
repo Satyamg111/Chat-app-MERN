@@ -12,7 +12,6 @@ import {baseUrl} from "../url/BaseUrl";
 const MyChats = ({ fetchAgain }) => {
     const [ loggedUser, setLoggedUser] =  useState();
     const { user, selectedChat,setSelectedChat, chats, setChats } = ChatState();
-    // console.log(user);
     const toast = useToast();
     
     const fetchChats = async() => {
@@ -24,7 +23,6 @@ const MyChats = ({ fetchAgain }) => {
             };
             const  {data}  = await axios.get(`${baseUrl}/api/chat`, config);
             setChats(data);
-            // console.log(data);
     
         } catch (error) {
             toast({

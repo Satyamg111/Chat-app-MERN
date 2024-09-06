@@ -73,4 +73,33 @@ const allUsers = asyncHandler(async(req, res) => {
 });
 
 
-module.exports = { registerUser , authUser, allUsers};
+const UpdateUser = (async(req,res) => {
+    const {userId,name,pic} = req.body;
+    let update;
+    console.log(userId,name,pic);
+    const filter = { _id: userId};
+    if(name) {
+        update = { name: name };
+    }
+    else if(pic){
+        update = { pic: pic };
+    }
+    else {
+        res.status(400);
+        throw new Error("Invalid Input");
+    }
+    const result = await User.findOneAndUpdate(filter,update,
+        {
+            new: true
+        }
+    );
+   if(!result) {
+        res.status(400);
+        throw new Error("failed");
+   }
+   else {
+     res.json(result);
+   }
+});
+
+module.exports = { registerUser , authUser, allUsers, UpdateUser};

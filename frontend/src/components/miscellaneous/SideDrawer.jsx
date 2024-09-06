@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Icon, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Spinner, Text, Tooltip, useToast } from '@chakra-ui/react';
+import { Avatar, Box, Button, Icon, Image, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Spinner, Text, Tooltip, useToast } from '@chakra-ui/react';
 import {useDisclosure} from '@chakra-ui/hooks'
 import {
     Drawer,
@@ -106,6 +106,7 @@ const SideDrawer = () => {
     <>
       <Box
         display={"flex"}
+        flexDir={"row"}
         justifyContent="space-between"
         alignItems={"center"}
         bg={"white"}
@@ -120,28 +121,28 @@ const SideDrawer = () => {
                 <Text display={{base:"none", md:"flex"}} px={4}>Search user</Text>
             </Button>
         </Tooltip>
-
-        <Text fontSize={"28px"} fontWeight={"600"}>My Chat App</Text>
-        <div>
+        <Image w={150} src='/logo.png' alt='logo'/>
+        {/* <Text fontSize={"28px"} fontWeight={"600"}>Connectify Chat-app</Text> */}
+        <Box display={"flex"} flexDir={"row"} alignItems={"center"}>
             <Menu>
-                <MenuButton p={1}>
-                    <Icon as={FaBell} fontSize={'2xl'} m={1}/>
+                <MenuButton p={1} mr={2}>
+                    <Icon as={FaBell} fontSize={'2xl'} />
                 </MenuButton>
                 {/* <MenuList></MenuList> */}
             </Menu>
             <Menu>
                 <MenuButton as={Button} rightIcon={<FaChevronCircleDown/>}>
-                    <Avatar size={'sm'} cursor={'pointer'} name={user.name} src={user.pic}/>
+                    <Avatar size={'sm'} cursor={'pointer'} name={user.name} src={user.pic} />
                 </MenuButton>
                 <MenuList>
-                    <ProfileModel user={user}>
+                    <ProfileModel user={user} isLoggedUser={true}>
                         <MenuItem>My Profile</MenuItem>
                     </ProfileModel>
                     <MenuDivider/> 
                     <MenuItem onClick={logoutHandler}>Logout</MenuItem>
                 </MenuList>
             </Menu>
-        </div>
+        </Box>
       </Box>
       <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay/>
