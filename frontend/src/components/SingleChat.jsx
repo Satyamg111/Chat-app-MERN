@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ChatState } from '../context/ChatProvider'
 import { Box, IconButton, Spinner, Text, FormControl, Input, useToast } from '@chakra-ui/react';
 import { IoArrowBackOutline } from "react-icons/io5";
+import { MdEmojiEmotions } from "react-icons/md";
+import { IoDocumentAttach } from "react-icons/io5";
+import { GiCancel } from "react-icons/gi";
+import EmojiPicker from 'emoji-picker-react';
 import { getSender, getSenderFull } from '../config/ChatLogics';
 import ProfileModel  from '../components/miscellaneous/ProfileModel';
 import UpdateGroupChatModel from './miscellaneous/UpdateGroupChatModel';
@@ -11,6 +15,8 @@ import './styles.css';
 import io from "socket.io-client";
 import {baseUrl} from "../url/BaseUrl";
 
+import "../assets/css/chat-loading.css"
+
 const ENDPOINT = `${baseUrl}`;
 var socket,selectedChatCompare;
 
@@ -18,12 +24,14 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [newMessage, setNewMessage] = useState();
+  const [newMessage, setNewMessage] = useState('');
+  const messageRef =  useRef('')
   const [socketConnected,setSocketConnected] = useState(false);
   const [typing,setTyping] = useState(false);
   const [isTyping,setIsTyping] = useState(false);
   const {user, selectedChat, setSelectedChat } = ChatState();
 
+  const [emojiPicker, setEmojipicker] = useState(false);
   const toast = useToast();
 
   useEffect(() => {
@@ -45,13 +53,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       const {data} = await axios.get(`${baseUrl}/api/message/${selectedChat._id}`,
         config
       );
-      // console.log(messages);
       setMessages(data);
       setLoading(false);
 
       socket.emit('join chat',selectedChat._id);
     } catch (error) {
-      // console.log(error);
       toast({
         title: 'Error occurred!',
         description: "Failed to send messages",
@@ -98,12 +104,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           },
           config
         );
-        // console.log(data);
         setLoading(false);
+        setEmojipicker(false);
         socket.emit('new message',data);
         setMessages([...messages,data]);
       } catch (error) {
-        console.log(error);
+        setEmojipicker(false);
         toast({
           title: 'Error occurred!',
           description: "Failed to send messages",
@@ -116,7 +122,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
   }
 
- 
+  const onEmojiClick = (e) => {
+    const emoji = e.emoji;
+    const newMsg = messageRef.current.value + emoji;
+    setNewMessage(newMsg)
+  }
 
   const typingHandler = (e) => {
     setNewMessage(e.target.value);
@@ -129,7 +139,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       socket.emit('typing',selectedChat._id);
     }
     let lastTypingTime = new Date().getTime();
-    var timerLength = 3000;
+    var timerLength = 2000;
 
     setTimeout(() => {
       var timeNow = new Date().getTime();
@@ -162,7 +172,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               { !selectedChat.isGroupChat ? (
                 <>
                   {getSender(user, selectedChat.users)}
-                  <ProfileModel user={getSenderFull(user, selectedChat.users)}/>
+                  <ProfileModel user={getSenderFull(user, selectedChat.users)}
+                                isLoggedUser={false}
+                        />
                 </>
               ) : (
                 <>
@@ -201,15 +213,40 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                   <ScrollableChat messages={messages}/>
                 </div>
               )}
-              <FormControl onKeyDown={sendMessage} mt={3} isRequired>
-                 {isTyping ? <div>Loading...</div> : <></>}
+              {isTyping ? 
+                    <div className="typing">
+                      <div className="typing__dot"></div>
+                      <div className="typing__dot"></div>
+                      <div className="typing__dot"></div>
+                  </div>
+                 : <></>}
+                 { emojiPicker ? (<EmojiPicker onEmojiClick={ onEmojiClick}  width={'100%'} height={'1000'}/>) : (<></>)}
+              <FormControl 
+                  onKeyDown={sendMessage} 
+                  mt={3} 
+                  display={'flex'} 
+                  alignItems={"center"}
+                  position={'relative'}
+                  isRequired>
+                    
+                 { !emojiPicker ? 
+                    (<MdEmojiEmotions size={"30px"} onClick={() => setEmojipicker(!emojiPicker)}/>) 
+                      : 
+                    (<GiCancel size={"30px"} onClick={() => setEmojipicker(!emojiPicker)} />)}
+                 
                   <Input
                     varient={'filled'}
                     bg={"E0E0E0"}
                     placeholder="Enter text here"
+                    ref={messageRef}
                     onChange = {typingHandler}
                     value={newMessage}
-                  />
+                    onFocus={() => setEmojipicker(!emojiPicker)}
+                    ml={1}
+                  />  
+
+                  {/* file sharing block */}
+                  <IoDocumentAttach  size={"30px"} />
               </FormControl>
             </Box>
             </>

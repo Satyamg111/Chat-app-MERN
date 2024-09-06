@@ -17,6 +17,8 @@
     "@emotion/styled": "^11.11.0",
     "axios": "^1.6.8",
     "chat-app": "file:../backend",
+    "crypto-js": "^4.2.0",
+    "emoji-picker-react": "^4.11.1",
     "framer-motion": "^11.0.22",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

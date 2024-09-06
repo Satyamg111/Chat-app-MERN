@@ -32,7 +32,7 @@ const ScrolableChat = ({messages}) => {
             )}
             <span style={{
               backgroundColor:`${m.sender._id === user._id ? "#BEE3F8" : "#B9F5D0"}`,
-              borderRadius:"20px",
+              borderRadius:`${m.sender._id === user._id ? "0 0 0 20px" : "0 0 20px 0"}`,
               marginTop:"2px",
               padding:"5px 15px",
               maxWidth:"75%",

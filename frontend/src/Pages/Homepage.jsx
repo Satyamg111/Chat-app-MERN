@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, Box, Text,Tab,Tabs, TabList, TabPanels,TabPanel } from "@chakra-ui/react";
+import { Container, Box, Text,Tab,Tabs, TabList, TabPanels,TabPanel, Image } from "@chakra-ui/react";
 import Login from '../components/Authentication/Login'
 import SignUp from '../components/Authentication/SignUp'
 import { useHistory } from "react-router-dom";
@@ -26,7 +26,8 @@ const Homepage = () => {
         borderRadius="lg"
         borderWidth="1px"
       >
-        <Text align="center" fontWeight={"600"}>My Chat App</Text>
+        <center><Image w={150} src='/logo.png' alt='logo'/></center>
+        {/* <Text align="center" fontWeight={"600"}>Connectify Chat-app</Text> */}
       </Box>
       <Box bg={"white"} w="100%" p={4} borderRadius="lg" borderWidth="1px">
         <Tabs variant="soft-rounded">

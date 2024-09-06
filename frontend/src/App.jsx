@@ -1,5 +1,4 @@
 import './App.css';
-// import {Button} from '@chakra-ui/react';
 import {Route} from 'react-router-dom';
 import Homepage from "./Pages/Homepage";
 import Chatpage from './Pages/Chatpage';
