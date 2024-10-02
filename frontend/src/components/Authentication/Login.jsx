@@ -67,7 +67,7 @@ const Login = () => {
     return (
         <VStack spacing="5px">
             <FormControl id='email' isRequired>
-                <FormLabel>Email</FormLabel>
+                <FormLabel color={"#ECDFCC"}>Email</FormLabel>
                 <Input
                     placeholder='Enter your email'
                     value={email}
@@ -75,7 +75,7 @@ const Login = () => {
                 />
             </FormControl>
             <FormControl id='password' isRequired>
-                <FormLabel>Password</FormLabel>
+                <FormLabel color={"#ECDFCC"}>Password</FormLabel>
                 <InputGroup>
                     <Input
                         type={show ? 'text': 'password'}

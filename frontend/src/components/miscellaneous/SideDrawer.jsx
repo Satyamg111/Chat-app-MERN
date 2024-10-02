@@ -109,7 +109,7 @@ const SideDrawer = () => {
         flexDir={"row"}
         justifyContent="space-between"
         alignItems={"center"}
-        bg={"white"}
+        bg={"#1E201E"}
         w="100%"
         p="5px 10px 5px 10px"
         borderWidth={"5px"}
@@ -117,19 +117,19 @@ const SideDrawer = () => {
         <Tooltip label="Search user" hasArrow placement='bottom-end'>
             <Button variant={"ghost"} onClick={onOpen}>
                 {/* {SeachIcon} */}
-                <Icon as={FaSearch} />
-                <Text display={{base:"none", md:"flex"}} px={4}>Search user</Text>
+                <Icon color="#ECDFCC" as={FaSearch} />
+                <Text color="#ECDFCC" display={{base:"none", md:"flex"}} px={4}>Search user</Text>
             </Button>
         </Tooltip>
         <Image w={150} src='/logo.png' alt='logo'/>
         {/* <Text fontSize={"28px"} fontWeight={"600"}>Connectify Chat-app</Text> */}
         <Box display={"flex"} flexDir={"row"} alignItems={"center"}>
-            <Menu>
+            {/* <Menu>
                 <MenuButton p={1} mr={2}>
-                    <Icon as={FaBell} fontSize={'2xl'} />
+                    <Icon color="#ECDFCC" as={FaBell} fontSize={'2xl'} />
                 </MenuButton>
-                {/* <MenuList></MenuList> */}
-            </Menu>
+                <MenuList></MenuList>
+            </Menu> */}
             <Menu>
                 <MenuButton as={Button} rightIcon={<FaChevronCircleDown/>}>
                     <Avatar size={'sm'} cursor={'pointer'} name={user.name} src={user.pic} />
@@ -144,16 +144,17 @@ const SideDrawer = () => {
             </Menu>
         </Box>
       </Box>
-      <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
+      <Drawer  placement='left' onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay/>
-        <DrawerContent>
+        <DrawerContent bg="#3C3D37">
             <DrawerCloseButton />
-            <DrawerHeader borderBottomWidth={"1px"}>Search user</DrawerHeader>
+            <DrawerHeader color={"#ECDFCC"} borderBottomWidth={"1px"}>Search user</DrawerHeader>
             <DrawerBody>
                 <Box display={"flex"} pb={2}>
                     <Input
                         placeholder='Search by name or email'
                         mr={2}
+                        color={"#ECDFCC"}
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
@@ -170,7 +171,7 @@ const SideDrawer = () => {
                                 user={user}
                                 handleFunction={() => accessChat(user._id)}
                             />
-                        )) :  <Text textAlign={"center"} fontWeight={"600"}>Not Found</Text>
+                        )) :  <Text color={"#ECDFCC"} textAlign={"center"} fontWeight={"600"}>Not Found</Text>
                     )
                 }
                 {loadingChat && <Spinner ml={"auto"} display={"flex"} /> }
