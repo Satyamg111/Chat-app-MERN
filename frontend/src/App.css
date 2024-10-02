@@ -1,9 +1,11 @@
 .App {
     min-height: 100vh;
     display: flex;
-    background: url('./assets/chat-backgound.jpg');
+    background: rgb(255, 255, 255) url('./assets/chat-backgound.jpg');
    /* background-size: cover; */
    background-position: center; 
+   background-blend-mode: exclusion;
+   
    backdrop-filter: opacity(0.3);
 }
 ::-webkit-scrollbar {

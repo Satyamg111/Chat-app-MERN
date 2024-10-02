@@ -47,7 +47,7 @@ const MyChats = ({ fetchAgain }) => {
             flexDir={"column"}
             alignItems={"center"}
             p={3}
-            bg={"white"}
+            bg={"#1E201E"}
             w={{base:"100%", md:"31%"}}
             borderRadius={"lg"}
             borderWidth={"1px"}
@@ -61,7 +61,8 @@ const MyChats = ({ fetchAgain }) => {
                 w={"100%"}
                 justifyContent={"space-between"}
                 alignItems={"center"}
-            >Chats
+            >
+                <Text color={"#ECDFCC"}>Chats</Text>
             <GroutChatModel display={"flex"}>
               <Button
                 fontSize={{base:"17px" , md:"12px" , lg:"17px"}}

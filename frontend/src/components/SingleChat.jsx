@@ -161,6 +161,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               px={2}
               w={"100%"}
               display={"flex"}
+              color={"#ECDFCC"}
               justifyContent={{base:"space-between"}}
               alignItems={"center"}
             >
@@ -194,7 +195,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               flexDir={"column"}
               justifyContent={"flex-end"}
               p={3}
-              bg={"#E8E8E8"}
+              bg={"#3C3D37"}
               w={"100%"}
               h={"100%"}
               borderRadius={"lg"}
@@ -230,9 +231,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                   isRequired>
                     
                  { !emojiPicker ? 
-                    (<MdEmojiEmotions size={"30px"} onClick={() => setEmojipicker(!emojiPicker)}/>) 
+                    (<MdEmojiEmotions color='#ECDFCC' size={"30px"} onClick={() => setEmojipicker(!emojiPicker)}/>) 
                       : 
-                    (<GiCancel size={"30px"} onClick={() => setEmojipicker(!emojiPicker)} />)}
+                    (<GiCancel color='#ECDFCC' size={"30px"} onClick={() => setEmojipicker(!emojiPicker)} />)}
                  
                   <Input
                     varient={'filled'}
@@ -246,7 +247,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                   />  
 
                   {/* file sharing block */}
-                  <IoDocumentAttach  size={"30px"} />
+                  <IoDocumentAttach color='#ECDFCC'  size={"30px"} />
               </FormControl>
             </Box>
             </>

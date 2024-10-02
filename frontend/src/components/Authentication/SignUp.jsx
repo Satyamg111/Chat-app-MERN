@@ -130,21 +130,21 @@ const SignUp = () => {
   return (
     <VStack spacing="5px">
         <FormControl id='first-name' isRequired>
-            <FormLabel>Name</FormLabel>
+            <FormLabel color={"#ECDFCC"}>Name</FormLabel>
             <Input
                 placeholder='Enter your name'
                 onChange={(e)=>setName(e.target.value)}
             />
         </FormControl>
         <FormControl id='email' isRequired>
-            <FormLabel>Email</FormLabel>
+            <FormLabel color={"#ECDFCC"}>Email</FormLabel>
             <Input
                 placeholder='Enter your email'
                 onChange={(e)=>setEmail(e.target.value)}
             />
         </FormControl>
         <FormControl id='password' isRequired>
-            <FormLabel>Password</FormLabel>
+            <FormLabel color={"#ECDFCC"}>Password</FormLabel>
             <InputGroup>
                 <Input
                     type={show ? 'text': 'password'}
@@ -159,7 +159,7 @@ const SignUp = () => {
             </InputGroup>
         </FormControl>
         <FormControl id='cpassword' isRequired>
-            <FormLabel>Confirm password</FormLabel>
+            <FormLabel color={"#ECDFCC"}>Confirm password</FormLabel>
             <InputGroup>
                 <Input
                     type={show ? 'text': 'password'}
@@ -174,7 +174,7 @@ const SignUp = () => {
             </InputGroup>
         </FormControl>
         <FormControl id='pic' isRequired>
-            <FormLabel>Profile Picture</FormLabel>
+            <FormLabel color={"#ECDFCC"}>Profile Picture</FormLabel>
             <Input
                 type='file'
                 p={1.5}
